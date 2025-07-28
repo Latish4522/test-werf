@@ -2,38 +2,23 @@ configVersion: 1  # Define the version of the config file
 
 project: html-nginx-deployment
 
-# Docker section to define the build process
-docker:
-  image: html-nginx:latest  # The name of the image to be built
-  
-  # Optionally define the Dockerfile location if it's not in the root directory
-  dockerfile: Dockerfile
-  
-  # Build context - specify which files to include
-  context: .
-  
-  # Build arguments (if needed)
-  # args:
-  #   BUILD_VERSION: "1.0.0"
+# Image configuration
+images:
+  - name: html-nginx
+    # Optionally define the Dockerfile location if it's not in the root directory
+    dockerfile: Dockerfile
+    context: .  # Build context
+    # Optional build arguments
+    # args:
+    #   BUILD_VERSION: "1.0.0"
 
-# Optional: If you want to use a registry for storing the image, uncomment and configure below
+# Registry configuration (optional)
 registry:
   url: ${REGISTRY_URL}
   username: ${REGISTRY_USERNAME}
   password: ${REGISTRY_PASSWORD}
 
-# Artifact section - required for the build
-artifact:
-  image: html-nginx:latest
-  docker:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        BUILD_VERSION: "1.0.0"
-
 # Optional: Kubernetes Helm chart configuration (Optional)
-# Uncomment this section if you're planning to deploy to Kubernetes using Helm
 # helm:
 #   chart:
 #     name: nginx
