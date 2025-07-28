@@ -1,0 +1,38 @@
+project: html-nginx-deployment
+
+# Docker section to define the build process
+docker:
+  image: html-nginx:latest  # The name of the image to be built
+  
+  # Optionally define the Dockerfile location if it's not in the root directory
+  dockerfile: Dockerfile
+  
+  # Build context - specify which files to include
+  context: .
+  
+  # Build arguments (if needed)
+  # args:
+  #   BUILD_VERSION: "1.0.0"
+
+# Optional: If you want to use a registry for storing the image, uncomment and configure below
+# registry: 
+registry:
+  url: ${REGISTRY_URL}
+  username: ${REGISTRY_USERNAME}
+  password: ${REGISTRY_PASSWORD}
+
+# Kubernetes Helm chart configuration (Optional)
+# Uncomment this section if you're planning to deploy to Kubernetes using Helm
+# helm:
+#   chart:
+#     name: nginx
+#     version: 1.0.0
+#     values:
+#       replicaCount: 1
+#       image:
+#         repository: html-nginx
+#         tag: latest
+
+# Optional: You can define custom build or deployment strategies here
+# build:
+#   concurrency: 2  # Optional, controls the number of concurrent builds 
